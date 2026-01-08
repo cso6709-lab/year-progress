@@ -45,7 +45,7 @@
             
             const total = end - start;
             const passed = now - start;
-            const percent = (passed / total * 100).toFixed(2);
+            const percent = (passed / total * 100).toFixed(3);
 
             document.getElementById('text').innerText = `${year} is ${percent}% complete.`;
             document.getElementById('bar').style.width = percent + '%';
@@ -56,3 +56,4 @@
 </body>
 
 </html>
+

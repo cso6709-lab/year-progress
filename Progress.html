@@ -2,39 +2,32 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>올해 진행률</title>
+    <title>대길이와 함께하는 2026 실시간 진행률</title>
     <style>
-        body { background-color: #000; color: #fff; text-align: center; font-family: sans-serif; padding-top: 100px; }
-        .container { width: 80%; max-width: 600px; margin: 0 auto; border: 4px solid #f1c40f; padding: 10px; }
-        h1 { font-size: 24px; margin-bottom: 20px; }
-        .progress-container { background-color: #333; height: 30px; width: 100%; }
-        .progress-bar { background-color: #f1c40f; height: 100%; width: 0%; transition: width 1s; }
-        }
-        /* 오른쪽 아래 서명 스타일 */
-        .signature {
-            text-align: right; /* 오른쪽 정렬 */
-            font-size: 10px; /* 폰트 사이즈 10 */
-            color: #f1c40f; /* 테두리 색과 맞춤 (원하시면 #888 등으로 변경 가능) */
-            margin-top: 15px; /* 위쪽 요소와의 간격 */
-        }
+        body { background-color: #000; color: #fff; text-align: center; font-family: 'Courier New', Courier, monospace; padding-top: 100px; margin: 0; }
+        .container { width: 90%; max-width: 650px; margin: 0 auto; border: 4px solid #f1c40f; padding: 40px; position: relative; }
+        
+        /* 숫자가 변할 때 흔들리지 않도록 고정폭 폰트(Monospace) 권장 */
+        h1 { font-size: 28px; margin-bottom: 25px; min-height: 40px; }
+        
+        .progress-container { background-color: #333; height: 35px; width: 100%; border-radius: 5px; overflow: hidden; }
+        .progress-bar { background-color: #f1c40f; height: 100%; width: 0%; }
+        
+        .signature { text-align: right; font-size: 12px; color: #f1c40f; margin-top: 20px; }
+        .main-link { text-decoration: none; color: inherit; display: block; }
     </style>
 </head>
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="2026 Year Progress Bar">
-    <meta name="twitter:description" content="올해는 얼마나 지났을까요? 대길이와 함께 확인하세요!">
-    <meta property="og:image" content="이미지주소">
-</head>
 <body>
-<a href="https://x.com/cso6709" style="text-decoration:none; color:inherit;">
-    <div class="container">
-        <h1 id="text">2026 is 0% complete.</h1>
-        <div class="progress-container">
-            <div id="bar" class="progress-bar"></div>
+
+    <a href="https://x.com/cso6709" class="main-link">
+        <div class="container">
+            <h1 id="text">Loading...</h1>
+            <div class="progress-container">
+                <div id="bar" class="progress-bar"></div>
+            </div>
+            <div class="signature">대길이(cso6709)</div>
         </div>
-    <div class="signature">
-         <a href="https://x.com/cso6709" target="_blank" style="color: inherit">대길이(cso6709)
-         </a>
-    </div>
+    </a>
 
     <script>
         function updateProgress() {
@@ -45,15 +38,21 @@
             
             const total = end - start;
             const passed = now - start;
-            const percent = (passed / total * 100).toFixed(3);
+            
+            // 소수점 9자리까지 표시 (실시간으로 숫자가 변하는 게 보임)
+            const percent = (passed / total * 100).toFixed(9);
 
+            // 텍스트와 바 업데이트
             document.getElementById('text').innerText = `${year} is ${percent}% complete.`;
             document.getElementById('bar').style.width = percent + '%';
         }
+
+        // 0.01초(10ms)마다 updateProgress 함수를 반복 실행
+        // 새로고침 없이도 숫자가 계속 올라갑니다.
+        setInterval(updateProgress, 10);
+
+        // 페이지가 로드되자마자 즉시 실행
         updateProgress();
     </script>
-<a>
 </body>
-
 </html>
-

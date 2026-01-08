@@ -40,7 +40,7 @@
             const passed = now - start;
             
             // 소수점 9자리까지 표시 (실시간으로 숫자가 변하는 게 보임)
-            const percent = (passed / total * 100).toFixed(9);
+            const percent = (passed / total * 100).toFixed(8);
 
             // 텍스트와 바 업데이트
             document.getElementById('text').innerText = `${year} is ${percent}% complete.`;
@@ -56,3 +56,4 @@
     </script>
 </body>
 </html>
+
